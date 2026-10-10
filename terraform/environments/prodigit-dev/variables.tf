@@ -10,6 +10,12 @@ variable "project_name" {
   default     = "three-tier"
 }
 
+variable "environment_name" {
+  description = "Environment identifier for tagging (e.g. mupando-dev, supando-dev)."
+  type        = string
+  default     = "mupando-dev"
+}
+
 variable "team_name" {
   description = "Team responsible for managing this infrastructure."
   type        = string

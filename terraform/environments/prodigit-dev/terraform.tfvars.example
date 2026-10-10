@@ -1,8 +1,10 @@
 # Copy to terraform.tfvars and adjust. terraform.tfvars is git-ignored.
 
-aws_region  = "eu-west-2"
-project     = "three-tier"
-environment = "dev"
+aws_region       = "eu-west-2"
+project_name     = "three-tier"
+environment_name = "mupando-dev"
+team_name        = "platform"
+environment      = "dev"
 
 # COST WARNING: a NAT Gateway bills hourly plus per GB processed.
 # Leave false unless the app tier needs outbound internet or Session Manager access.

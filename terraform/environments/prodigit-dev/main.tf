@@ -84,14 +84,14 @@ module "web" {
 # ---------------------------------------------------------------------------
 # App tier: private subnet, no public IP
 # ---------------------------------------------------------------------------
-# module "app" {
-#   source = "../../modules/ec2"
+module "app" {
+  source = "../../modules/ec2"
 
-#   name           = "${local.name}-app"
-#   subnet_id      = module.vpc.app_subnet_ids[0]
-#   instance_type  = var.instance_type
-#   s3_bucket_arns = [module.s3_assets.bucket_arn]
-#   user_data      = templatefile("${path.module}/user_data/app.sh.tftpl", { environment = var.environment })
+  name           = "${local.name}-app"
+  subnet_id      = module.vpc.app_subnet_ids[0]
+  instance_type  = var.instance_type
+  s3_bucket_arns = [module.s3_assets.bucket_arn]
+  user_data      = templatefile("${path.module}/user_data/app.sh.tftpl", { environment = var.environment })
 
-#   security_group_ids = [module.security_groups.app_sg_id]
-# }
+  security_group_ids = [module.security_groups.app_sg_id]
+}

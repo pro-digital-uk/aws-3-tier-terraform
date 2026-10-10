@@ -43,6 +43,7 @@ All AWS resources automatically receive consistent tags via the provider's `defa
 
 | Tag | Purpose | Source |
 | --- | --- | --- |
+| `Name` | Environment-specific identifier | `var.environment_name` (e.g. `mupando-dev`, `supando-dev`) |
 | `Project` | Project identifier | `var.project_name` (default: `three-tier`) |
 | `Team` | Responsible team/department | `var.team_name` (default: `platform`) |
 | `Environment` | Deployment environment | `var.environment` (dev/test/prod) |
@@ -50,12 +51,44 @@ All AWS resources automatically receive consistent tags via the provider's `defa
 
 Override tags in `terraform.tfvars`:
 ```hcl
-project_name = "my-project"
-team_name    = "backend-team"
-environment  = "dev"
+environment_name = "mupando-dev"  # Use your environment name here
+project_name     = "my-project"
+team_name        = "backend-team"
+environment      = "dev"
 ```
 
 These tags enable cost allocation, automated compliance scanning, and resource organization in the AWS console.
+
+## Remote State (S3 Backend)
+
+Terraform state is stored remotely in S3 for team collaboration and state locking:
+
+**Configuration**: `terraform/environments/prodigit-dev/backend.tf`
+- **Bucket**: `terraform-state-493245399435`
+- **Key**: `dev/aws-3-tier`
+- **Locking**: DynamoDB table `terraform-locks` (prevents concurrent modifications)
+- **Encryption**: Enabled
+
+**To Activate Remote State**:
+```bash
+cd terraform/environments/prodigit-dev
+terraform init
+```
+
+When you run `terraform init`:
+1. Terraform downloads required providers
+2. Connects to the S3 backend bucket
+3. Initializes state storage if this is the first deploy
+4. Sets up state locking with DynamoDB
+
+**Important**: Ensure the S3 bucket and DynamoDB table exist before running `terraform init`:
+```bash
+# Verify S3 bucket
+aws s3 ls s3://terraform-state-493245399435/
+
+# Verify DynamoDB table
+aws dynamodb describe-table --table-name terraform-locks --region eu-west-2
+```
 
 ## Deploying
 ```bash
