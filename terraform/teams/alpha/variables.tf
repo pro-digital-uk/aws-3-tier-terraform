@@ -7,13 +7,13 @@ variable "aws_region" {
 variable "project_name" {
   description = "Project name, used as a prefix for resource names and tagging."
   type        = string
-  default     = "three-tier"
+  default     = "mupando"
 }
 
 variable "environment_name" {
   description = "Environment identifier for tagging (e.g. mupando-dev, supando-dev)."
   type        = string
-  default     = "mupando-dev"
+  default     = "dev"
 }
 
 variable "team_name" {
@@ -61,7 +61,7 @@ variable "enable_nat_gateway" {
 variable "instance_type" {
   description = "Instance type for the web and app servers."
   type        = string
-  default     = "t3.micro"
+  default     = "t2.micro"
 }
 
 variable "force_destroy_bucket" {
