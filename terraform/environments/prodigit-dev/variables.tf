@@ -4,10 +4,16 @@ variable "aws_region" {
   default     = "eu-west-2"
 }
 
-variable "project" {
-  description = "Project name, used as a prefix for resource names."
+variable "project_name" {
+  description = "Project name, used as a prefix for resource names and tagging."
   type        = string
   default     = "three-tier"
+}
+
+variable "team_name" {
+  description = "Team responsible for managing this infrastructure."
+  type        = string
+  default     = "platform"
 }
 
 variable "environment" {

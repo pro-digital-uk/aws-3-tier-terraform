@@ -15,6 +15,7 @@ This is an educational Terraform project demonstrating a production-ready three-
 - **Session Manager**: No SSH keys embedded; uses AWS Systems Manager for secure access
 - **S3 asset bucket**: Private, versioned, encrypted for storing application data
 - **NAT Gateway**: Optional and disabled by default (cost warning: hourly charges apply)
+- **Tagging Strategy**: All AWS resources automatically tagged with Project, Team, Environment, and ManagedBy
 
 ## When Making Changes
 
@@ -35,6 +36,26 @@ This is an educational Terraform project demonstrating a production-ready three-
 - The app tier module is intentionally commented out as a teaching exercise
 - Students should uncomment it themselves and fix the security group configuration
 - Outputs for app tier (instance_id, private_ip) are also commented out
+
+## Resource Tagging
+
+All AWS resources automatically receive consistent tags via the provider's `default_tags` block:
+
+| Tag | Purpose | Source |
+| --- | --- | --- |
+| `Project` | Project identifier | `var.project_name` (default: `three-tier`) |
+| `Team` | Responsible team/department | `var.team_name` (default: `platform`) |
+| `Environment` | Deployment environment | `var.environment` (dev/test/prod) |
+| `ManagedBy` | Infrastructure as Code tool | Always `terraform` |
+
+Override tags in `terraform.tfvars`:
+```hcl
+project_name = "my-project"
+team_name    = "backend-team"
+environment  = "dev"
+```
+
+These tags enable cost allocation, automated compliance scanning, and resource organization in the AWS console.
 
 ## Deploying
 ```bash
