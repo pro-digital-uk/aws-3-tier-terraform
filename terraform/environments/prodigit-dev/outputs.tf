@@ -48,6 +48,21 @@ output "assets_bucket" {
   value       = module.s3_assets.bucket_id
 }
 
+output "website_bucket" {
+  description = "Name of the S3 static website bucket."
+  value       = module.s3_website.bucket_id
+}
+
+output "website_endpoint" {
+  description = "S3 website endpoint URL (HTTP only)."
+  value       = module.s3_website.website_endpoint
+}
+
+output "website_bucket_domain" {
+  description = "S3 bucket domain name for static website hosting."
+  value       = module.s3_website.bucket_domain_name
+}
+
 # output "security_group_ids" {
 #   description = "Tiered security group IDs."
 #   value = {

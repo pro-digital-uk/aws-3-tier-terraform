@@ -51,6 +51,21 @@ module "s3_assets" {
 }
 
 # ---------------------------------------------------------------------------
+# Web tier: static website hosting via S3
+# ---------------------------------------------------------------------------
+module "s3_website" {
+  source = "../../modules/s3-website"
+
+  bucket_name            = "${local.name}-website-${data.aws_caller_identity.current.account_id}"
+  index_document         = "index.html"
+  error_document         = "index.html"
+  enable_versioning      = false
+  upload_index_document  = true
+  index_document_path    = "${path.module}/../../index.html"
+  allowed_principal_org_id = null
+}
+
+# ---------------------------------------------------------------------------
 # Web tier: Nginx in a public subnet
 # ---------------------------------------------------------------------------
 module "web" {
