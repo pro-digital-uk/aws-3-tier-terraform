@@ -3,6 +3,16 @@ variable "bucket_name" {
   type        = string
 }
 
+variable "website_name" {
+  description = "Name displayed on the static website."
+  type        = string
+}
+
+variable "environment" {
+  description = "Environment displayed on the static website."
+  type        = string
+}
+
 variable "index_document" {
   description = "Name of the index document (default page)."
   type        = string

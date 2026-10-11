@@ -2,6 +2,7 @@
 
 aws_region       = "eu-west-2"
 project_name     = "three-tier"
+website_name     = "Three Tier"
 environment_name = "mupando-dev"
 team_name        = "platform"
 environment      = "dev"

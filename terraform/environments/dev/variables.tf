@@ -10,6 +10,12 @@ variable "project_name" {
   default     = "mupando"
 }
 
+variable "website_name" {
+  description = "Name displayed on the S3 website."
+  type        = string
+  default     = "My Awesome"
+}
+
 variable "environment_name" {
   description = "Environment identifier for tagging (e.g. mupando-dev, supando-dev)."
   type        = string

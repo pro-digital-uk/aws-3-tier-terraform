@@ -47,8 +47,8 @@ resource "aws_s3_bucket_website_configuration" "website" {
 resource "aws_s3_object" "website" {
   bucket       = aws_s3_bucket.website.id
   key          = "index.html"
-  source       = "${path.module}/..//..//index.html"
-  etag         = filemd5("${path.module}/..//..//index.html")
+  content      = local.index_html
+  etag         = md5(local.index_html)
   content_type = "text/html"
 }
 
@@ -66,6 +66,13 @@ resource "aws_s3_bucket_public_access_block" "website" {
   block_public_policy     = false
   ignore_public_acls      = false
   restrict_public_buckets = false
+}
+
+locals {
+  index_html = templatefile(var.index_document_path, {
+    website_name = var.website_name
+    environment  = var.environment
+  })
 }
 
 

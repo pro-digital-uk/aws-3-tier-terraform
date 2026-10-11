@@ -16,11 +16,13 @@ module "s3_website" {
   source = "../../modules/s3-website"
 
   bucket_name            = "${local.name}-website-${data.aws_caller_identity.current.account_id}"
+  website_name           = var.website_name
+  environment            = var.environment
   index_document         = "index.html"
   error_document         = "error.html"
   enable_versioning      = false
   upload_index_document  = true
-  index_document_path    = "${path.module}/../../../index.html"
+  index_document_path    = "${path.module}/../../index.html"
   allowed_principal_org_id = null
 }
 
