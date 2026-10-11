@@ -68,11 +68,4 @@ resource "aws_s3_bucket_public_access_block" "website" {
   restrict_public_buckets = false
 }
 
-locals {
-  index_html = templatefile(var.index_document_path, {
-    website_name = var.website_name
-    environment  = var.environment
-  })
-}
-
 
