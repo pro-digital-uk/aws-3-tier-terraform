@@ -19,7 +19,7 @@ variable "environment_name" {
 variable "team_name" {
   description = "Team responsible for managing this infrastructure."
   type        = string
-  default     = "platform"
+  default     = "alpha"
 }
 
 variable "environment" {

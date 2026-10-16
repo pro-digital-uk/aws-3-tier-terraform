@@ -13,7 +13,8 @@ locals {
 # Network: web (public), app (private) and data (isolated) subnets
 # ---------------------------------------------------------------------------
 module "vpc" {
-  source = "../../modules/vpc"
+
+  source              = "git@github.com:pro-digital-uk/aws-terraform-modules//vpc"
   name                = local.name
   cidr_block          = var.vpc_cidr
   azs                 = local.azs

@@ -47,8 +47,8 @@ resource "aws_s3_bucket_website_configuration" "website" {
 resource "aws_s3_object" "website" {
   bucket       = aws_s3_bucket.website.id
   key          = "index.html"
-  source       = "${path.module}/..//..//index.html"
-  etag         = filemd5("${path.module}/..//..//index.html")
+  content      = local.index_html
+  etag         = md5(local.index_html)
   content_type = "text/html"
 }
 

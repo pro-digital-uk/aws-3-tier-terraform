@@ -73,7 +73,7 @@ resource "aws_subnet" "db" {
 resource "aws_db_subnet_group" "this" {
   count = length(var.db_subnet_cidrs) > 1 ? 1 : 0
 
-  name       = "${var.name}-db"
+  name       = lower("${var.name}-db")
   subnet_ids = aws_subnet.db[*].id
 
   tags = merge(var.tags, { Name = "${var.name}-db-subnet-group" })
